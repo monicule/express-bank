@@ -10,14 +10,14 @@ app.use(express.json({
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    return res.send('Bank');
-});
-
 app.use('/api', apiRouter);
 
+app.get('/', (req, res) => {
+    return res.send('Bankas. Sveiki atvykę!')
+});
+
 app.get('*', (req, res) => {
-    return res.send('404 - puslapis nerastas...');
+    return res.send('404 - puslapis nerastas.');
 });
 
 app.use((req, res, next) => {
