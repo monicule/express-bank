@@ -1,4 +1,6 @@
 import express from "express";
+import { isName } from '../lib/nameValidation.js';
+import { isSurname } from '../lib/surnameValidation.js'
 
 export const apiRouter = express.Router();
 
@@ -9,4 +11,5 @@ apiRouter.get('/', (req, res) => {
     };
     return res.json(data.message);
 });
+
 
