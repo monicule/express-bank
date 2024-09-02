@@ -30,19 +30,6 @@ apiRouter.get('/', (req, res) => {
     },
 ];*/
 
-function findAccount(fullName) {
-    const [name, surname] = fullName.split('-');
-    return accounts.find(acc =>
-        acc.name.toLowerCase() === name.toLowerCase()
-        && acc.surname.toLowerCase() === surname.toLowerCase()
-    );
-}
-
-function doesAccountExist(name, surname) {
-    return accounts.find(acc => acc.name.toLowerCase() === name.toLowerCase()
-        && acc.surname.toLowerCase() === surname.toLowerCase())
-}
-
 apiRouter.get('/api/account', (req, res) => {
     return res.json(accounts);
 });
@@ -53,22 +40,7 @@ apiRouter.post('/api/account', (req, res) => {
         return res.json({ message: 'Įveskite visus nurodytus duomenis.' });
     }
 
-    const ageNow = calculateAge(dob);
-    if (ageNow < 18) {
-        return res.json({ message: 'Sąskaitą gali susikurti tik pilnamečiai asmenys (18m. ir daugiau).' })
-    }
-
-    if (doesAccountExist(name, surname)) {
-        return res.json({ message: 'Sąskaita su tokiu vardu jau egzistuoja.' });
-    }
-
-    function createAccount(name, surname, dob) {
-        const newAccount = { name, surname, dob, balance: 0 };
-        accounts.push(newAccount);
-    }
-    createAccount(name, surname, dob);
-
-    return res.json({ message: 'Jūsų paskyra sėkmingai sukurta.' });
+    // return res.json({ message: 'Jūsų paskyra sėkmingai sukurta.' });
 });
 
 apiRouter.get('/api/account/:fullName', (req, res) => {
@@ -137,4 +109,38 @@ apiRouter.get('/api/account/:fullName/dob', (req, res) => {
     }
 
     return res.json({ dob: account.dob });
+});
+
+apiRouter.put('/account/:name-:surname', (req, res) => {
+    for (let i = 0; i < accounts.length; i++) {
+        if (req.params.name.toLowerCase() === accounts[i].name.toLowerCase()) {
+            accounts[i].name = req.body.name;
+            accounts[i].surname = req.body.surname;
+            accounts[i].dob = req.body.dob;
+            accounts[i].balance = req.body.balance;
+        }
+
+    }
+
+    return res.json({
+        state: 'success',
+        message: 'Paskyra sėkmingai pakoreguota',
+    });
+});
+
+
+apiRouter.get('/account/john-doe/:surname', (req, res) => {
+    for (let i = 0; i < accounts.length; i++) {
+        if (req.params.surname.toLowerCase() === accounts[i].surname.toLowerCase()) {
+            return res.json(accounts[i].surname);
+        }
+    }
+});
+
+apiRouter.get('/api/account/john-doe/dob/', (req, res) => {
+    for (let i = 0; i < accounts.length; i++) {
+        if (accounts[i].name.toLowerCase() === 'john') {
+            return res.json(accounts[i]);
+        }
+    }
 });
