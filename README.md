@@ -87,7 +87,7 @@ Requirements:
 ```
 
 -   Returns account owners name, surname, and date of birth.
--   HTTP method - POST
+-   HTTP method - GET
 
 Response example:
 
@@ -106,6 +106,7 @@ Response example:
 ```
 
 -   Deletes account
+-   HTTP method - DELETE
 
 Requirements:
 
@@ -118,6 +119,13 @@ Requirements:
 ```
 
 -   Updates the account details (name, surname, and date of birth).
+-   HTTP method - PUT
+
+Data to send:
+
+-   name
+-   surname
+-   day of birth (YYYY-MM-DD)
 
 ### /api/account/name
 
