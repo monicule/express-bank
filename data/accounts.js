@@ -1,14 +1,14 @@
 export const accounts = [
     {
-        name: 'Jonas',
-        surname: 'Jonaitis',
+        name: 'John',
+        surname: 'Doe',
         dob: '2000-01-01',
-        money: 1000,
+        balance: 1000,
     },
     {
-        name: 'Petras',
-        surname: 'Petraitis',
+        name: 'Tom',
+        surname: 'Smith',
         dob: '2002-02-02',
-        money: 100,
+        balance: 100,
     },
 ];
