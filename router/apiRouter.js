@@ -1,9 +1,9 @@
 import express from "express";
-//import { accounts } from '../data/accounts.js';
-//import { nameValidation } from '../lib/nameValidation.js';
-//import { surnameValidation } from '../lib/surnameValidation.js';
-//import { ageValidation } from '../lib/ageValidation.js';
-//import { dataValidation } from '../lib/dataValidation.js';
+import { accounts } from '../data/accounts.js';
+import { isName } from '../lib/nameValidation.js';
+import { isSurname } from '../lib/surnameValidation.js';
+import { ageValidation } from '../lib/ageValidation.js';
+import { dataValidation } from '../lib/dataValidation.js';
 
 export const apiRouter = express.Router();
 
@@ -15,7 +15,7 @@ apiRouter.get('/', (req, res) => {
     return res.json(data);
 });
 
-const accounts = [
+/*const accounts = [
     {
         name: 'John',
         surname: 'Doe',
@@ -28,7 +28,7 @@ const accounts = [
         dob: '2002-02-02',
         balance: 100,
     },
-];
+];*/
 
 function findAccount(fullName) {
     const [name, surname] = fullName.split('-');
